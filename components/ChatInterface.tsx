@@ -12,7 +12,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ isOpen, onClose }) => {
     {
       id: 'welcome',
       role: 'model',
-      text: 'Hi! I can help you brainstorm ideas or refine your campaign. What do you need help with?',
+      text: 'Olá! Posso ajudar você a ter ideias ou refinar sua campanha. Com o que você precisa de ajuda?',
       timestamp: new Date()
     }
   ]);
@@ -54,7 +54,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ isOpen, onClose }) => {
       const botMsg: ChatMessage = {
         id: (Date.now() + 1).toString(),
         role: 'model',
-        text: responseText || "I'm having trouble thinking right now.",
+        text: responseText || "Estou com dificuldades para pensar agora.",
         timestamp: new Date()
       };
       setMessages(prev => [...prev, botMsg]);
@@ -62,7 +62,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ isOpen, onClose }) => {
       const errorMsg: ChatMessage = {
         id: (Date.now() + 1).toString(),
         role: 'model',
-        text: "Sorry, I encountered an error. Please try again.",
+        text: "Desculpe, encontrei um erro. Por favor, tente novamente.",
         timestamp: new Date()
       };
       setMessages(prev => [...prev, errorMsg]);
@@ -84,7 +84,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ isOpen, onClose }) => {
                 </svg>
             </div>
             <div>
-                <h3 className="font-semibold text-slate-800">Marketing Assistant</h3>
+                <h3 className="font-semibold text-slate-800">Assistente de Marketing</h3>
                 <span className="text-xs text-green-500 flex items-center">
                     <span className="w-1.5 h-1.5 bg-green-500 rounded-full mr-1"></span> Online
                 </span>
@@ -134,7 +134,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ isOpen, onClose }) => {
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="Ask me anything..."
+            placeholder="Pergunte qualquer coisa..."
             className="w-full pl-4 pr-12 py-3 bg-slate-100 border-transparent focus:bg-white focus:border-indigo-500 focus:ring-0 rounded-xl text-sm transition-all"
             disabled={isTyping}
           />

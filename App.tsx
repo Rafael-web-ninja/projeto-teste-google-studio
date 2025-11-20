@@ -7,7 +7,7 @@ import ChatInterface from './components/ChatInterface';
 function App() {
   const [topic, setTopic] = useState('');
   const [audience, setAudience] = useState('');
-  const [tone, setTone] = useState('Professional');
+  const [tone, setTone] = useState('Profissional');
   
   const [loadingState, setLoadingState] = useState<LoadingState>(LoadingState.IDLE);
   const [campaignData, setCampaignData] = useState<CampaignData | null>(null);
@@ -35,7 +35,7 @@ function App() {
       setLoadingState(LoadingState.COMPLETE);
 
     } catch (err) {
-      setError("Failed to generate content. Please verify your API key and try again.");
+      setError("Falha ao gerar conteúdo. Verifique sua chave de API e tente novamente.");
       setLoadingState(LoadingState.ERROR);
     }
   };
@@ -49,7 +49,7 @@ function App() {
         setCampaignData(prev => prev ? { ...prev, imageUrl: newImageUrl } : null);
         setLoadingState(LoadingState.COMPLETE);
     } catch (err) {
-        setError("Failed to regenerate image.");
+        setError("Falha ao regenerar imagem.");
         setLoadingState(LoadingState.COMPLETE); // Revert to complete (with old image or error)
     }
   };
@@ -80,7 +80,7 @@ function App() {
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                     </svg>
-                    <span>AI Assistant</span>
+                    <span>Assistente IA</span>
                 </button>
             </div>
           </div>
@@ -94,15 +94,15 @@ function App() {
           {/* Left: Input Form */}
           <div className="lg:col-span-4 flex flex-col space-y-6 overflow-y-auto pr-2">
             <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-                <h2 className="text-lg font-semibold text-slate-900 mb-4">Campaign Details</h2>
+                <h2 className="text-lg font-semibold text-slate-900 mb-4">Detalhes da Campanha</h2>
                 <form onSubmit={handleGenerate} className="space-y-4">
                     <div>
-                        <label htmlFor="topic" className="block text-sm font-medium text-slate-700 mb-1">What is this campaign about?</label>
+                        <label htmlFor="topic" className="block text-sm font-medium text-slate-700 mb-1">Sobre o que é esta campanha?</label>
                         <textarea
                             id="topic"
                             rows={3}
                             className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 text-sm"
-                            placeholder="e.g., Summer sale on premium sunglasses, 50% off selected styles"
+                            placeholder="ex: Promoção de verão em óculos de sol, 50% de desconto"
                             value={topic}
                             onChange={(e) => setTopic(e.target.value)}
                             required
@@ -110,12 +110,12 @@ function App() {
                     </div>
 
                     <div>
-                        <label htmlFor="audience" className="block text-sm font-medium text-slate-700 mb-1">Target Audience</label>
+                        <label htmlFor="audience" className="block text-sm font-medium text-slate-700 mb-1">Público Alvo</label>
                         <input
                             type="text"
                             id="audience"
                             className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 text-sm"
-                            placeholder="e.g., Millennials who love travel"
+                            placeholder="ex: Jovens adultos que amam viajar"
                             value={audience}
                             onChange={(e) => setAudience(e.target.value)}
                             required
@@ -123,18 +123,18 @@ function App() {
                     </div>
 
                     <div>
-                        <label htmlFor="tone" className="block text-sm font-medium text-slate-700 mb-1">Tone of Voice</label>
+                        <label htmlFor="tone" className="block text-sm font-medium text-slate-700 mb-1">Tom de Voz</label>
                         <select
                             id="tone"
                             className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 text-sm"
                             value={tone}
                             onChange={(e) => setTone(e.target.value)}
                         >
-                            <option>Professional</option>
-                            <option>Exciting & Urgent</option>
-                            <option>Friendly & Casual</option>
-                            <option>Luxury & Minimalist</option>
-                            <option>Humorous</option>
+                            <option value="Profissional">Profissional</option>
+                            <option value="Empolgante e Urgente">Empolgante e Urgente</option>
+                            <option value="Amigável e Casual">Amigável e Casual</option>
+                            <option value="Luxuoso e Minimalista">Luxuoso e Minimalista</option>
+                            <option value="Bem-humorado">Bem-humorado</option>
                         </select>
                     </div>
 
@@ -149,7 +149,7 @@ function App() {
                                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                                </svg>
-                               <span>Writing Copy...</span>
+                               <span>Escrevendo Texto...</span>
                            </>
                        ) : loadingState === LoadingState.GENERATING_IMAGE ? (
                            <>
@@ -157,14 +157,14 @@ function App() {
                                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                                </svg>
-                               <span>Designing Visuals...</span>
+                               <span>Criando Visual...</span>
                            </>
                        ) : (
                            <>
                                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                                    <path fillRule="evenodd" d="M6.672 1.911a1 1 0 10-1.932.518l.259.966a1 1 0 001.932-.518l-.26-.966zM2.429 4.74a1 1 0 10-.517 1.932l.966.259a1 1 0 00.517-1.932l-.966-.26zm8.814-.569a1 1 0 00-1.415-1.414l-.707.707a1 1 0 101.415 1.415l.707-.708zm-7.071 7.072l.707-.707A1 1 0 003.465 9.12l-.708.707a1 1 0 001.415 1.415zm3.2-5.171a1 1 0 00-1.3 1.3l4 10a1 1 0 001.823.075l1.38-2.759 3.018 3.02a1 1 0 001.414-1.415l-3.019-3.02 2.76-1.379a1 1 0 00-.076-1.822l-10-4z" clipRule="evenodd" />
                                </svg>
-                               <span>Generate Campaign</span>
+                               <span>Gerar Campanha</span>
                            </>
                        )}
                     </button>
@@ -185,8 +185,8 @@ function App() {
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                         </svg>
                     </div>
-                    <h3 className="font-semibold text-slate-800 text-sm">Smart Copy</h3>
-                    <p className="text-xs text-slate-500 mt-1">Gemini 3 Pro drafts compelling text.</p>
+                    <h3 className="font-semibold text-slate-800 text-sm">Texto Inteligente</h3>
+                    <p className="text-xs text-slate-500 mt-1">Gemini 3 Pro cria textos persuasivos.</p>
                 </div>
                 <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex flex-col items-center text-center">
                     <div className="w-10 h-10 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center mb-2">
@@ -194,8 +194,8 @@ function App() {
                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                         </svg>
                     </div>
-                    <h3 className="font-semibold text-slate-800 text-sm">Instant Visuals</h3>
-                    <p className="text-xs text-slate-500 mt-1">Imagen 4 creates custom headers.</p>
+                    <h3 className="font-semibold text-slate-800 text-sm">Visuais Instantâneos</h3>
+                    <p className="text-xs text-slate-500 mt-1">Imagen 4 cria cabeçalhos personalizados.</p>
                 </div>
             </div>
           </div>

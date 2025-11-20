@@ -9,14 +9,14 @@ const IMAGE_MODEL = 'imagen-4.0-generate-001';
 
 export const generateCampaignContent = async (topic: string, audience: string, tone: string): Promise<CampaignData> => {
   const prompt = `
-    Create a complete email marketing campaign for: ${topic}.
-    Target Audience: ${audience}.
-    Tone: ${tone}.
+    Atue como um especialista em marketing digital. Crie uma campanha de email marketing completa para: ${topic}.
+    Público Alvo: ${audience}.
+    Tom de voz: ${tone}.
     
-    Return a JSON object containing:
-    1. A catchy email subject line.
-    2. The full email body text (plain text with line breaks).
-    3. A highly detailed image generation prompt that describes a visual to accompany this email.
+    Retorne um objeto JSON contendo:
+    1. Uma linha de assunto cativante (em Português do Brasil).
+    2. O texto completo do corpo do email (em Português do Brasil, texto simples com quebras de linha).
+    3. Um prompt de geração de imagem altamente detalhado que descreva um visual para acompanhar este email (IMPORTANTE: O PROMPT DA IMAGEM DEVE SER EM INGLÊS para melhor qualidade).
   `;
 
   try {
@@ -28,9 +28,9 @@ export const generateCampaignContent = async (topic: string, audience: string, t
         responseSchema: {
           type: Type.OBJECT,
           properties: {
-            subject: { type: Type.STRING, description: "The email subject line" },
-            body: { type: Type.STRING, description: "The email body content" },
-            imagePrompt: { type: Type.STRING, description: "A detailed prompt for an image generator" }
+            subject: { type: Type.STRING, description: "A linha de assunto do email em Português" },
+            body: { type: Type.STRING, description: "O conteúdo do corpo do email em Português" },
+            imagePrompt: { type: Type.STRING, description: "Um prompt detalhado para gerador de imagem em INGLÊS" }
           },
           required: ["subject", "body", "imagePrompt"]
         }
@@ -40,9 +40,9 @@ export const generateCampaignContent = async (topic: string, audience: string, t
     if (response.text) {
       return JSON.parse(response.text) as CampaignData;
     }
-    throw new Error("No content generated");
+    throw new Error("Nenhum conteúdo gerado");
   } catch (error) {
-    console.error("Error generating campaign text:", error);
+    console.error("Erro ao gerar texto da campanha:", error);
     throw error;
   }
 };
@@ -63,9 +63,9 @@ export const generateCampaignImage = async (imagePrompt: string): Promise<string
     if (base64ImageBytes) {
       return `data:image/jpeg;base64,${base64ImageBytes}`;
     }
-    throw new Error("No image generated");
+    throw new Error("Nenhuma imagem gerada");
   } catch (error) {
-    console.error("Error generating image:", error);
+    console.error("Erro ao gerar imagem:", error);
     throw error;
   }
 };
@@ -76,14 +76,14 @@ export const chatWithBot = async (history: {role: string, parts: {text: string}[
             model: TEXT_MODEL,
             history: history,
             config: {
-                systemInstruction: "You are a helpful, expert marketing assistant. You help users refine their email campaigns, suggest improvements for copy, and brainstorm ideas. Keep answers concise and professional."
+                systemInstruction: "Você é um assistente de marketing útil e especialista. Você ajuda os usuários a refinar suas campanhas de e-mail, sugere melhorias para o texto e faz brainstorming de ideias. Mantenha as respostas concisas, profissionais e sempre responda em Português do Brasil."
             }
         });
         
         const result = await chat.sendMessage({ message });
         return result.text;
     } catch (error) {
-        console.error("Chat error:", error);
+        console.error("Erro no chat:", error);
         throw error;
     }
 }
